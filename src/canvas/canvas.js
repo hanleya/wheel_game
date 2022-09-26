@@ -2,9 +2,6 @@ var drawing = false;
 var color = "black";
 var line_weight;
 
-var curs_off_x = 8;
-var curs_off_y = 8;
-
 var canvas;
 var ctx;
 
@@ -34,5 +31,8 @@ function onMouseMove(ev) {
 }
 
 function getMousePos(ev) {
-    
+    let rect = ev.target.getBoundingClientRect();
+    let x = ev.clientX;
+    let y = ev.clientY;
+    return [x - rect.left, y - rect.top];
 }
