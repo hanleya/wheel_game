@@ -1,7 +1,9 @@
-
 var drawing = false;
 var color = "black";
 var line_weight;
+
+var curs_off_x = 8;
+var curs_off_y = 8;
 
 var canvas;
 var ctx;
@@ -17,16 +19,20 @@ function init() {
     canvas.addEventListener('mousemove', onMouseMove);
 }
 
-function onMouseDown() { 
+function onMouseDown(ev) { 
     drawing = true; 
     ctx.strokeStyle = color;
     ctx.beginPath();
-    ctx.moveTo(ev.layerX - 8,  ev.layerY - 8);
+    ctx.moveTo(...getMousePos(ev));
 }
 
 function onMouseMove(ev) {
     if (!drawing) { return; }
 
-    ctx.lineTo(ev.layerX - 8, ev.layerY - 8);
+    ctx.lineTo(...getMousePos(ev));
     ctx.stroke();
+}
+
+function getMousePos(ev) {
+    
 }
