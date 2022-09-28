@@ -1,8 +1,21 @@
 #main {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 #canvas {
-    border: 2px solid black;
+    border: .25em solid black;
+    background-attachment: "#fff1e8";
+    flex-basis: 60%;
+}
+
+#pal_container {
+    flex-basis: 10%;
+}
+
+.pal_button {
+    border: none;
+    border-radius: .75em;
+    padding: 1.5em;
+    margin: .5em;
 }
