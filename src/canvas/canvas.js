@@ -10,6 +10,7 @@
     var drawing = false;
     var color = "black";
     var line_weight;
+    var eraser = false;
     
     var canvas;
     var ctx;
@@ -48,13 +49,15 @@
         pal_elems = document.querySelectorAll("#pal_weight > .pal_button");
         for(i = 0; i < WEIGHTS.length; i++) {
             let w = WEIGHTS[i];
-            pal_elems.item(i).addEventListener('click', () => { line_weight = w; });
+            pal_elems.item(i).addEventListener('click', () => { line_weight = w; eraser = false; });
         }
+        pal_elems.item(WEIGHTS.length).addEventListener('click', () => { eraser = true; })
 
         pal_elems = document.querySelectorAll("#pal_color > .pal_button");
         for(i = 0; i < pal_elems.length; i++) {
             let c = COLORS[i];
             pal_elems.item(i).addEventListener('click', () => { color = c; });
+            pal_elems.item(i).style["background-color"] = c;
         }
     }
 
@@ -65,8 +68,13 @@
     
     function onMouseDown(ev) { 
         drawing = true; 
-        ctx.strokeStyle = color;
-        ctx.lineWidth = line_weight;
+        if (!eraser) {
+            ctx.strokeStyle = color;
+            ctx.lineWidth = line_weight;
+        } else {
+            ctx.strokeStyle = "#ffffff";
+            ctx.lineWidth = 30.0;
+        }
         ctx.beginPath();
         ctx.moveTo(...getMousePos(ev));
     }
