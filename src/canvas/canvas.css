@@ -1,3 +1,4 @@
+
 #main {
     display: flex;
     justify-content: space-evenly;
@@ -5,7 +6,6 @@
 
 #canvas {
     border: .25em solid black;
-    background-attachment: "#fff1e8";
     flex-basis: 60%;
 }
 

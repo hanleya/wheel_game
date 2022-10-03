@@ -39,20 +39,20 @@
     }
 
     function initPalette() {
-        const WEIGHTS = [];
-        const COLORS = ["#000000", "#1d2b53", "#7e2553", "#008751", "#ab5236", "#5f574f", "#c2c3c7", "#fff1e8",
-            "#ff004d", "#ffa300", "#ffec27", "#00e436", "#29adff", "#83769c", "#ff77a8", "#ffccaa"];
+        const WEIGHTS = [1.5, 3.0, 4.5];
+        const COLORS = ["#000000", "#ffffff", "#ff004d", "#ffa300", "#ffec27", "#00e436", "#29adff", "#065ab5 ", "#800080", "#ff77a8"];
 
         var pal_elems;
         var i;
 
         pal_elems = document.querySelectorAll("#pal_weight > .pal_button");
         for(i = 0; i < WEIGHTS.length; i++) {
-            //TODO: set up line weights
+            let w = WEIGHTS[i];
+            pal_elems.item(i).addEventListener('click', () => { line_weight = w; });
         }
 
         pal_elems = document.querySelectorAll("#pal_color > .pal_button");
-        for(; i < pal_elems.length; i++) {
+        for(i = 0; i < pal_elems.length; i++) {
             let c = COLORS[i];
             pal_elems.item(i).addEventListener('click', () => { color = c; });
         }
@@ -66,6 +66,7 @@
     function onMouseDown(ev) { 
         drawing = true; 
         ctx.strokeStyle = color;
+        ctx.lineWidth = line_weight;
         ctx.beginPath();
         ctx.moveTo(...getMousePos(ev));
     }
