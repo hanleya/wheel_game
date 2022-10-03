@@ -37,6 +37,8 @@
         canvas.addEventListener('mousedown', onMouseDown);
         canvas.addEventListener('mouseup', () => { drawing = false; });
         canvas.addEventListener('mousemove', onMouseMove);
+
+        document.getElementById("done_button").addEventListener('click', exportImg);
     }
 
     function initPalette() {
@@ -95,7 +97,11 @@
 
 
     //~~~~~~~~~~~~~~~~~~~~~~~
-    //  PALETTE FUNCTIONS
+    //  EXPORTING FUNCTIONS
     //~~~~~~~~~~~~~~~~~~~~~~~
+
+    function exportImg() {
+        window.open(canvas.toDataURL(),"","width=700,height=700");
+    }
 
 })();
