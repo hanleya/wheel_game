@@ -101,7 +101,7 @@
     //~~~~~~~~~~~~~~~~~~~~~~~
 
     function exportImg() {
-        window.open(canvas.toDataURL(),"","width=700,height=700");
+        window.open(canvas.toDataURL(),"",`width=${canvas.width},height=${canvas.height}`);
     }
 
 })();
