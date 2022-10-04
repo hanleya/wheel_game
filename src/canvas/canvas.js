@@ -90,9 +90,10 @@
     
     function getMousePos(ev) {
         let rect = ev.target.getBoundingClientRect();
+        let border = ev.target.style.border + line_weight / 2
         let x = ev.clientX;
         let y = ev.clientY;
-        return [x - rect.left, y - rect.top];
+        return [x - rect.left - border, y - rect.top - border];
     }
 
 
