@@ -27,6 +27,9 @@
         initPalette();
     }
 
+    /**
+     * Sets up the canvas's event listeners and scales the canvas.
+     */
     function initCanvas() {
         canvas = document.getElementById("canvas");
         ctx = canvas.getContext("2d");
@@ -41,6 +44,9 @@
         document.getElementById("done_button").addEventListener('click', exportImg);
     }
 
+    /**
+     * Implements the functionality for all the buttons on the palette with event listeners.
+     */
     function initPalette() {
         const WEIGHTS = [1.5, 3.0, 4.5];
         const COLORS = ["#000000", "#ffffff", "#ff004d", "#ffa300", "#ffec27", "#00e436", "#29adff", "#065ab5 ", "#800080", "#ff77a8"];
@@ -68,6 +74,11 @@
     //  DRAWING FUNCTIONS
     //~~~~~~~~~~~~~~~~~~~~~~~
     
+    /**
+     * Starts drawing a line when the user clicks on the canvas. Sets line color, weight, and 
+     * handles the eraser.
+     * @param {Event} ev
+     */
     function onMouseDown(ev) { 
         drawing = true; 
         if (!eraser) {
@@ -81,6 +92,10 @@
         ctx.moveTo(...getMousePos(ev));
     }
     
+    /**
+     * Draws a line between the user's current mouse position, and the user's last mouse position.
+     * @param {Event} ev 
+     */
     function onMouseMove(ev) {
         if (!drawing) { return; }
     
@@ -88,6 +103,11 @@
         ctx.stroke();
     }
     
+    /**
+     * Gets the mouse's position within the canvas, centers the cursor on the line's center.
+     * Factors in the position on the page, canvas's border, and current line weight.
+     * @param {Event} ev 
+     */
     function getMousePos(ev) {
         let rect = ev.target.getBoundingClientRect();
         let border = ev.target.style.border + line_weight / 2
@@ -101,6 +121,9 @@
     //  EXPORTING FUNCTIONS
     //~~~~~~~~~~~~~~~~~~~~~~~
 
+    /**
+     * Exports the canvas's content to a png. Temp code until the page connects to a database or the gallery.
+     */
     function exportImg() {
         window.open(canvas.toDataURL(),"",`width=${canvas.width},height=${canvas.height}`);
     }
