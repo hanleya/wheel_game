@@ -23,3 +23,8 @@
     padding: 1.5em;
     margin: .5em;
 }
+
+#small {
+    background: url("..\..\img\canvas\line_wt_dot.png");
+    background-size: 10%;
+}
