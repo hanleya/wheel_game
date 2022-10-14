@@ -8,6 +8,24 @@
 
     var user = 0;
 
+    window.addEventListener("load", init);
+
+    function init() {
+        //NOTE: temporary
+        document.getElementById("b_assign").addEventListener("click", () => {
+            assignPrompts(
+                document.getElementById("num_players").value,
+                document.getElementById("is_double").checked,
+                document.getElementById("is_split").checked
+            );
+            showPrompt(
+                document.getElementById("num_players").value,
+                document.getElementById("is_double").checked,
+                document.getElementById("is_split").checked
+            );
+        });
+    }
+
     /**
      * Assigns prompts to players at the beginning of a new round.
      * @param {int} n - number of players in lobby
@@ -47,11 +65,11 @@
      * @param {boolean} b - if game is using two lists
      */
     function showPrompt(n, d, b) {
-        document.getElementById("prompt1").innerHTML = u_prompts[user];
+        document.getElementById("prompt_1").innerHTML = u_prompts[user];
 
         if (d || b) {
-            document.getElementById("prompt2").classList.remove("hide");
-            document.getElementById("prompt2").innerHTML = u_prompts_b[user];
+            document.getElementById("prompt_2").classList.remove("hide");
+            document.getElementById("prompt_2").innerHTML = u_prompts_b[user];
         }
     }
 
