@@ -6,6 +6,8 @@
     var u_prompts = [];
     var u_prompts_b = [];
 
+    var user = 0;
+
     /**
      * Assigns prompts to players at the beginning of a new round.
      * @param {int} n - number of players in lobby
@@ -36,6 +38,21 @@
         }
 
         return true;
+    }
+
+    /**
+     * Displays each player's prompt(s) on the screen.
+     * @param {int} n - number of players in lobby
+     * @param {boolean} d - if round is a double round
+     * @param {boolean} b - if game is using two lists
+     */
+    function showPrompt(n, d, b) {
+        document.getElementById("prompt1").innerHTML = u_prompts[user];
+
+        if (d || b) {
+            document.getElementById("prompt2").classList.remove("hide");
+            document.getElementById("prompt2").innerHTML = u_prompts_b[user];
+        }
     }
 
     /**
