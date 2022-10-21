@@ -20,11 +20,7 @@
 .pal_button {
     border: none;
     border-radius: .75em;
-    padding: 1.5em;
+    width: 3em;
+    height: 3em;
     margin: .5em;
-}
-
-#small {
-    background: url("..\..\img\canvas\line_wt_dot.png");
-    background-size: 10%;
 }

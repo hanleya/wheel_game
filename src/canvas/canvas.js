@@ -64,7 +64,7 @@
         pal_elems = document.querySelectorAll("#pal_color > .pal_button");
         for(i = 0; i < pal_elems.length; i++) {
             let c = COLORS[i];
-            pal_elems.item(i).addEventListener('click', () => { color = c; });
+            pal_elems.item(i).addEventListener('click', () => { color = c; eraser = false; });
             pal_elems.item(i).style["background-color"] = c;
         }
     }
