@@ -22,11 +22,20 @@
             $player = lobby_add_player($lobby, $name); 
             $_SESSION["player"] = $player;
 
-            echo $player;
-
+            
         }
     } else {
+        $lobby = get_lobby($code);
 
+        if ($lobby == false) {
+            echo "lobby doesn't exist";
+        } else {
+            session_start();
+            $_SESSION["lobby"] = $lobby;
+
+            $player = lobby_add_player($lobby, $name); 
+            $_SESSION["player"] = $player;
+        }
     }
 
 ?>
