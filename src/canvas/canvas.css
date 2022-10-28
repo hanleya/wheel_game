@@ -15,6 +15,9 @@
 
 #pal_container {
     flex-basis: 10%;
+    text-align: center;
+    border: .2em solid black;
+    border-radius: 1em;
 }
 
 .pal_button {

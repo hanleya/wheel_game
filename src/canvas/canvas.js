@@ -41,7 +41,9 @@
         canvas.addEventListener('mouseup', () => { drawing = false; });
         canvas.addEventListener('mousemove', onMouseMove);
 
+        /*
         document.getElementById("done_button").addEventListener('click', exportImg);
+        */
     }
 
     /**
