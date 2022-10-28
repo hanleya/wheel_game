@@ -9,11 +9,13 @@
 <body>
     <div>
         <form id="join" method="post" action="src/lobby/to_lobby.php">
+            <input id="name-join" name="name" class="name" type="text">
             <input id="code-join" name="code" class="code" type="text">
             <input name="action" value="join" type="hidden">
             <input id="btn-join" class="btn" type="submit" value="Join" maxlength="8"></button>
         </form>
         <form id="create" method="post" action="src/lobby/to_lobby.php">
+            <input id="name-join" name="name" class="name" type="text">
             <input id="code-create" name="code" class="code" type="text">
             <input name="action" value="create" type="hidden">
             <input id="btn-create" class="btn" type="submit" value="Create" maxlength="8"></button>
