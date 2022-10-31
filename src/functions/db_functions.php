@@ -49,7 +49,7 @@
 
     function lobby_add_player($lid, $name) {
 
-        $n = count(lobby_players($lid)) + 1;
+        $n = count(lobby_players($lid));
 
         $query = "INSERT INTO player (lobbyID, playerName, playerNum) VALUES (:l, :name, :num);";
         $params = [":l" => $lid, ":name" => $name, ":num" => $n];

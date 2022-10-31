@@ -22,7 +22,7 @@
             $player = lobby_add_player($lobby, $name); 
             $_SESSION["player"] = $player;
 
-            
+            header("Location: ../lobby.php");
         }
     } else {
         $lobby = get_lobby($code);
@@ -35,6 +35,8 @@
 
             $player = lobby_add_player($lobby, $name); 
             $_SESSION["player"] = $player;
+
+            header("Location: ../lobby.php");
         }
     }
 
