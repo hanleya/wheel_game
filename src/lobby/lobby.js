@@ -11,6 +11,7 @@
     
     function init() {
         get_players();
+        setInterval(get_players, 2000);
     }
     
 
