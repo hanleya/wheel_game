@@ -90,4 +90,16 @@
 
     }
 
+    function add_prompt($lid, $prompt) {
+
+        $query = "INSERT INTO prompt (lobbyID, prompt) VALUES (:l, :p);";
+        $params = [":l" => $lid, ":p" => $prompt];
+
+        $db = connect();
+        $stmt = $db->prepare($query);
+
+        return $stmt->execute($params);
+
+    }
+
 ?>

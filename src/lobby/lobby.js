@@ -14,6 +14,7 @@
         get_prompts();
         setInterval(get_players, 2000);
         setInterval(get_prompts, 2000);
+        document.getElementById("prompt-btn").addEventListener("click", add_prompt);
     }
     
 
@@ -68,11 +69,10 @@
 
     function add_prompt() {
         let prompt = document.getElementById("prompt-in").value;
-        let url = "functions/get_prompts.php?lobby=" + lobby + "&prompt=" + prompt;
+        let url = "functions/add_prompt.php?lobby=" + lobby + "&prompt=" + prompt;
 
         fetch(url)
-            .then(check_status)
-            .then(update_prompts);
+            .then(get_prompts);
     }
 
     function check_status(response) {
