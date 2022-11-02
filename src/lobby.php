@@ -2,7 +2,7 @@
     include "functions/db_functions.php";
     session_start();
 
-    if (!(isset($_SESSION["lobby"]) or (!isset($_SESSION["player"])))) {
+    if ((!isset($_SESSION["lobby"]) or (!isset($_SESSION["player"])))) {
         header("Location: ../home.php");
     } else {
         $lobby = $_SESSION["lobby"];
@@ -22,11 +22,11 @@
     <script src="lobby/lobby.js"></script>
 </head>
 <body>
-    <div id=players>
-
-    </div>
+    <div id=players></div>
     <div id=prompts>
-
+        <input type="text" id="prompt-in">
+        <button id="prompt-btn">Submit</button>
+        <div id=prompt-list></div>
     </div>
 </body>
 </html>

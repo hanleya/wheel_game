@@ -9,6 +9,11 @@
         return $pdo;
     }
 
+    
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #  LOBBY FUNCTIONS
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     function get_lobby($code) {
 
         $query = "SELECT lobbyID FROM lobby WHERE accessCode = :c;";
@@ -34,9 +39,14 @@
 
     }
 
+    
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #  PLAYER FUNCTIONS
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     function lobby_players($lid) {
 
-        $query = "SELECT * FROM player WHERE lobbyID = $lid;";
+        $query = "SELECT * FROM player WHERE lobbyID = :l;";
         $params = [":l" => $lid];
 
         $db = connect();
@@ -59,6 +69,24 @@
         $stmt->execute($params);
 
         return $n;
+
+    }
+
+    
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #  PROMPT FUNCTIONS
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    function lobby_prompts($lid) {
+
+        $query = "SELECT * FROM prompt WHERE lobbyID = :l;";
+        $params = [":l" => $lid];
+
+        $db = connect();
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+
+        return $stmt->fetchAll();
 
     }
 
