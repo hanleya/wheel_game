@@ -2,11 +2,11 @@
     include "functions/db_functions.php";
     session_start();
 
-    if ((!isset($_SESSION["lobby"]) or (!isset($_SESSION["player"])))) {
-        header("Location: ../home.php");
-    } else {
+    if (isset($_SESSION["lobby"]) and isset($_SESSION["player"])) {
         $lobby = $_SESSION["lobby"];
         $player = $_SESSION["player"];
+    } else {
+        header("Location: home.php");
     }
 ?>
 
@@ -28,5 +28,6 @@
         <button id="prompt-btn">Submit</button>
         <div id=prompt-list></div>
     </div>
+    <button id="start-btn">Start</button>
 </body>
 </html>

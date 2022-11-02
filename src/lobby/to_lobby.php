@@ -34,9 +34,13 @@
             $_SESSION["lobby"] = $lobby;
 
             $player = lobby_add_player($lobby, $name); 
-            $_SESSION["player"] = $player;
 
-            header("Location: ../lobby.php");
+            if ($player) {
+                $_SESSION["player"] = $player;
+                header("Location: ../lobby.php");
+            } else {
+                echo "name taken in this lobby";
+            }
         }
     }
 

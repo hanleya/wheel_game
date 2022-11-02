@@ -59,16 +59,35 @@
 
     function lobby_add_player($lid, $name) {
 
-        $n = count(lobby_players($lid));
+        $players = lobby_players($lid);
 
-        $query = "INSERT INTO player (lobbyID, playerName, playerNum) VALUES (:l, :name, :num);";
-        $params = [":l" => $lid, ":name" => $name, ":num" => $n];
+        foreach ($players as $p) {
+            if ($p["playerName"] == $name) {
+                return false;
+            }
+        }
+
+        $query = "INSERT INTO player (lobbyID, playerName) VALUES (:l, :n);";
+        $params = [":l" => $lid, ":n" => $name];
 
         $db = connect();
         $stmt = $db->prepare($query);
         $stmt->execute($params);
 
-        return $n;
+        $query = "SELECT playerID FROM player WHERE playerName = :n AND lobbyID = :l";
+        $params = [":l" => $lid, ":n" => $name];
+
+        $db = connect();
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC)["playerID"];
+
+    }
+
+    function player_ready($lid, $n) {
+        
+        
 
     }
 
