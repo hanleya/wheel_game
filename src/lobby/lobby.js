@@ -10,11 +10,18 @@
     window.addEventListener('load', init);
     
     function init() {
+
         get_players();
         get_prompts();
         setInterval(get_players, 2000);
         setInterval(get_prompts, 2000);
+
         document.getElementById("prompt-btn").addEventListener("click", add_prompt);
+        document.getElementById("start-btn").addEventListener("click", () => {
+            document.getElementById("start-btn").disabled = true;
+            set_ready();
+        });
+
     }
     
 
@@ -46,6 +53,10 @@
         });
     }
 
+    function wait_for_round(response) {
+        console.log(response);
+    }
+
 
     //~~~~~~~~~~~~~~~~~~~~~~~~
     //  DB QUERIES
@@ -72,14 +83,23 @@
         let url = "functions/add_prompt.php?lobby=" + lobby + "&prompt=" + prompt;
 
         fetch(url)
+            .then(check_status)
             .then(get_prompts);
+    }
+
+    function set_ready() {
+        let url = "functions/set_ready.php?lobby=" + lobby + "&player=" + player;
+
+        fetch(url)
+            .then(check_status)
+            .then(wait_for_round);
     }
 
     function check_status(response) {
         if (response.ok) {
             return response.json();
         } else {
-            return Promise.reject(new Error(response.status + response.statusText));
+            return Promise.reject(new Error(response.status + "   " + response.statusText));
         }
     }
 

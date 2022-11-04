@@ -28,10 +28,35 @@
 
     }
 
+    function get_lobby_id($lid) {
+
+        $query = "SELECT * FROM lobby WHERE lobbyID = :l;";
+        $params = [":l" => $lid];
+
+        $db = connect();
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+        $res = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $res;
+
+    }
+
     function create_lobby($code) {
 
         $query = "INSERT INTO lobby (accessCode) VALUES (:c);";
         $params = [":c" => $code];
+
+        $db = connect();
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+
+    }
+
+    function lobby_set_timer($lid) {
+
+        $query = "UPDATE lobby SET timerStart = :t WHERE lobbyID = :l;";
+        $params = [":l" => $lid, ":t" => time()];
 
         $db = connect();
         $stmt = $db->prepare($query);
@@ -46,7 +71,7 @@
 
     function lobby_players($lid) {
 
-        $query = "SELECT * FROM player WHERE lobbyID = :l;";
+        $query = "SELECT * FROM player WHERE :l = lobbyID;";
         $params = [":l" => $lid];
 
         $db = connect();
@@ -85,9 +110,27 @@
 
     }
 
-    function player_ready($lid, $n) {
+    function player_ready($lid, $pid) {
         
+        $query = "UPDATE player SET isReady = 1 WHERE :p = playerID;";
+        $params = [":p" => $pid];
+
+        $db = connect();
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+
+
+        $lobby = get_lobby_id($lid);
+        $response = ["time_left" => 0];
+
+        if (is_null($lobby["timerStart"])) {
+            lobby_set_timer($lid);
+            $response["time_left"] = 60;
+        } else {
+            $response["time_left"] = 60 - (time() - $lobby["timerStart"]);
+        }
         
+        return json_encode($response);
 
     }
 

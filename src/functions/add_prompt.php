@@ -8,7 +8,7 @@
         $prompt = $_GET["prompt"];
     
         if (add_prompt($lid, $prompt)) {
-            echo "Ok";
+            echo json_encode([]);
         } else {
             header("HTTP/1.1 500 Internal Server Error"); 
             echo `Error inserting into {$lid}`; 
