@@ -63,8 +63,11 @@
     }
 
     function to_prompt(first) {
-        if (first) { setup_round(); }
-        window.location.href = "wheel.html";
+        if (first) { 
+            setup_round(); 
+        } else {
+            window.location.href = "wheel.html";
+        }
     }
 
 
@@ -109,7 +112,8 @@
         let url = "functions/setup_round.php?lobby=" + lobby;
 
         fetch(url)
-            .then(check_status);
+            .then(check_status)
+            .then(() => { window.location.href = "wheel.html"; });
     }
 
     function check_status(response) {
