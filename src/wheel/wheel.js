@@ -1,83 +1,53 @@
+(function(){
 
+    var prompt_set = false;
 
-    var prompt_list = ["a", "b", "c", "d", "e", "f", "g", "h"];
-    var prompt_list_b = ["i", "j", "k", "l"];
-
-    var u_prompts = [];
-    var u_prompts_b = [];
-
-    var user = 0;
-
-    window.addEventListener("load", init);
-
+    window.addEventListener('load', init);
+    
     function init() {
-        //NOTE: temporary
-        document.getElementById("b_assign").addEventListener("click", () => {
-            assignPrompts(
-                document.getElementById("num_players").value,
-                document.getElementById("is_double").checked,
-                document.getElementById("is_split").checked
-            );
-            showPrompt(
-                document.getElementById("num_players").value,
-                document.getElementById("is_double").checked,
-                document.getElementById("is_split").checked
-            );
-        });
+
+        setInterval(get_prompts, 2000);
+
+        document.getElementById("start-btn").addEventListener("click", to_canvas);
+
     }
 
-    /**
-     * Assigns prompts to players at the beginning of a new round.
-     * @param {int} n - number of players in lobby
-     * @param {boolean} d - if round is a double round
-     * @param {boolean} b - if game is using two lists
-     */
-    function assignPrompts(n, d, b) {
-        u_prompts = [];
-        u_prompts_b = [];
+    function check_prompt(response) {
+        var prompt = null;
 
-        if (prompt_list.length < (d ? 2 * n : n) || (b && prompt_list_b.length < n )) {
-            console.warn("too few prompts");
-            return false;
-        }
-
-        for (let i = 0; i < n; i++) {
-            u_prompts.push(...prompt_list.splice(randBelow(prompt_list.length), 1));
-            console.warn(u_prompts[u_prompts.length - 1]);
-
-            if (d) {
-                u_prompts_b.push(...prompt_list.splice(randBelow(prompt_list.length), 1));
-                console.warn(u_prompts_b[u_prompts_b.length - 1]);
-            } else if (b) {
-                u_prompts_b.push(...prompt_list_b.splice(randBelow(prompt_list_b.length), 1));
-                console.warn(u_prompts_b[u_prompts_b.length - 1]);
+        response.forEach(p => {
+            if (p["playerID"] == player) {
+                prompt = p;
             }
+        });
 
-        }
-
-        return true;
-    }
-
-    /**
-     * Displays each player's prompt(s) on the screen.
-     * @param {int} n - number of players in lobby
-     * @param {boolean} d - if round is a double round
-     * @param {boolean} b - if game is using two lists
-     */
-    function showPrompt(n, d, b) {
-        document.getElementById("prompt_1").innerHTML = u_prompts[user];
-
-        if (d || b) {
-            document.getElementById("prompt_2").classList.remove("hide");
-            document.getElementById("prompt_2").innerHTML = u_prompts_b[user];
+        if (prompt !== null) {
+            document.getElementById("prompt").innerHTML = prompt["prompt"];
+            prompt_set = true;
         }
     }
 
-    /**
-     * Generates a random number between 0 (inclusive) and n (exclusive)
-     * @param {int} n - The upper bound for the random number
-     */
-    function randBelow(n) {
-        return Math.floor(Math.random() * n);
+    function to_canvas() {
+        if (prompt_set) {
+            window.location.href = "canvas.html";
+        }
     }
 
+    function get_prompts() {
+        let url = "functions/get_prompts.php?lobby=" + lobby;
+
+        fetch(url)
+            .then(check_status)
+            .then(check_prompt);
+    }
+
+    function check_status(response) {
+        if (response.ok) {
+            return response.json();
+        } else {
+            console.log(response);
+            return Promise.reject(new Error(response.status + "   " + response.statusText));
+        }
+    }
+
+})();

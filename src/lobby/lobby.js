@@ -1,8 +1,6 @@
 (function(){
     "use script";
 
-    const BASE_URL = "http://localhost/wheel_game/functions/"; //TEMPORARY: GIVE REAL URL LATER
-
     //~~~~~~~~~~~~~~~~~~~~~~~
     //  INITIALIZATION
     //~~~~~~~~~~~~~~~~~~~~~~~
@@ -66,7 +64,7 @@
         if (first) { 
             setup_round(); 
         } else {
-            window.location.href = "wheel.html";
+            window.location.href = "wheel.php";
         }
     }
 
@@ -113,7 +111,7 @@
 
         fetch(url)
             .then(check_status)
-            .then(() => { window.location.href = "wheel.html"; });
+            .then(() => { window.location.href = "wheel.php"; });
     }
 
     function check_status(response) {
