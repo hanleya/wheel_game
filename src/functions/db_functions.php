@@ -64,6 +64,11 @@
 
     }
 
+    function setup_round($lid) {
+        remove_inactive_players($lid);
+        assign_prompts($lid);
+        echo json_encode([]);
+    }
     
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #  PLAYER FUNCTIONS
@@ -121,16 +126,28 @@
 
 
         $lobby = get_lobby_id($lid);
-        $response = ["time_left" => 0];
+        $response = ["first" => 0];
 
         if (is_null($lobby["timerStart"])) {
             lobby_set_timer($lid);
-            $response["time_left"] = 60;
+            $response["time_left"] = 15;
+            $response["first"] = 1;
         } else {
-            $response["time_left"] = 60 - (time() - $lobby["timerStart"]);
+            $response["time_left"] = 15 - (time() - $lobby["timerStart"]);
         }
         
         return json_encode($response);
+
+    }
+
+    function remove_inactive_players($lid) {
+
+        $query = "DELETE FROM player WHERE lobbyID = :l AND isReady = 0;";
+        $params = [":l" => $lid];
+
+        $db = connect();
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
 
     }
 
@@ -161,6 +178,34 @@
         $stmt = $db->prepare($query);
 
         return $stmt->execute($params);
+
+    }
+
+    function assign_prompts($lid) {
+
+        $players = lobby_players($lid);
+        $prompts = lobby_prompts($lid);
+        $pr_count = count($prompts);
+
+        foreach ($players as $pl) {
+            $n = rand(0, $pr_count - 1);
+
+            assign_to_player($pl["playerID"], $prompts[$n]["promptID"]);
+
+            array_splice($prompts, $n, 1);
+            $pr_count--;
+        }
+
+    }
+
+    function assign_to_player($plid, $prid) {
+
+        $query = "UPDATE prompt SET playerID = :pl WHERE promptID = :pr;";
+        $params = [":pl" => $plid, ":pr" => $prid];
+
+        $db = connect();
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
 
     }
 

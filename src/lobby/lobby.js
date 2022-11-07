@@ -53,8 +53,18 @@
         });
     }
 
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~
+    //  ROUND START FUNCTIONS
+    //~~~~~~~~~~~~~~~~~~~~~~~~
+
     function wait_for_round(response) {
-        console.log(response);
+        setTimeout(() => { to_prompt(response.first) }, response.time_left * 1000);
+    }
+
+    function to_prompt(first) {
+        if (first) { setup_round(); }
+        window.location.href = "wheel.html";
     }
 
 
@@ -95,10 +105,18 @@
             .then(wait_for_round);
     }
 
+    function setup_round() {
+        let url = "functions/setup_round.php?lobby=" + lobby;
+
+        fetch(url)
+            .then(check_status);
+    }
+
     function check_status(response) {
         if (response.ok) {
             return response.json();
         } else {
+            console.log(response);
             return Promise.reject(new Error(response.status + "   " + response.statusText));
         }
     }
