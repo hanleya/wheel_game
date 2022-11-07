@@ -19,7 +19,7 @@
     <title>Document</title>
     <script> lobby = "<?php echo $lobby;?>";</script>
     <script> player = "<?php echo $player;?>";</script>
-    <script src="wheel/wheel.js"></script>
+    <script src="wheel/wheel2.js"></script>
 </head>
 <body>
     <h1 id="prompt"></h1>
