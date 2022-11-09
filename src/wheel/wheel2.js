@@ -1,14 +1,13 @@
 (function(){
 
-    var prompt_set = false;
+    var interval;
 
     window.addEventListener('load', init);
     
     function init() {
 
-        setInterval(get_prompts, 2000);
-
-        document.getElementById("start-btn").addEventListener("click", to_canvas);
+        interval = setInterval(get_prompts, 500);
+        document.getElementById("start-btn").disabled = true;
 
     }
 
@@ -22,14 +21,10 @@
         });
 
         if (prompt !== null) {
+            clearInterval(interval);
             document.getElementById("prompt").innerHTML = prompt["prompt"];
-            prompt_set = true;
-        }
-    }
-
-    function to_canvas() {
-        if (prompt_set) {
-            window.location.href = "canvas.html";
+            document.getElementById("prompt-post").value = prompt["prompt"];
+            document.getElementById("start-btn").disabled = false;
         }
     }
 

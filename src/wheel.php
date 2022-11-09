@@ -23,6 +23,10 @@
 </head>
 <body>
     <h1 id="prompt"></h1>
-    <button id="start-btn">Start</button>
+    <form method="post" action="canvas.php">
+        <input type="hidden" id="prompt-post" name="prompt">
+        <input type="submit" id="start-btn" value="Start">
+    </form>
+    
 </body>
 </html>

@@ -1,3 +1,16 @@
+<?php 
+    include "functions/db_functions.php";
+    session_start();
+
+    if (isset($_POST["prompt"]) and isset($_SESSION["lobby"]) and isset($_SESSION["player"])) {
+        $lobby = $_SESSION["lobby"];
+        $player = $_SESSION["player"];
+        $prompt = $_POST["prompt"];
+    } else {
+        header("Location: home.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +25,7 @@
 
 <body>
     <div id="top">
-        <h1 id="prompt">Prompt</h1>
+        <h1 id="prompt"><?php echo $prompt; ?></h1>
     </div>
     <div id="main">
         <canvas id="canvas"></canvas>
