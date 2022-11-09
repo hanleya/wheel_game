@@ -42,7 +42,7 @@
         canvas.addEventListener('mousemove', onMouseMove);
 
         /*
-        document.getElementById("done_button").addEventListener('click', exportImg);
+        document.getElementById("done_button").addEventListener('click', finishRound);
         */
     }
 

@@ -49,7 +49,7 @@
                 <button class="pal_button"></button>
             </div>
         </div>
-        <!-- <button id="done_button">Done</button> -->
+        <button id="done_button">Done</button>
     </div>
 </body>
 
