@@ -41,9 +41,7 @@
         canvas.addEventListener('mouseup', () => { drawing = false; });
         canvas.addEventListener('mousemove', onMouseMove);
 
-        /*
         document.getElementById("done_button").addEventListener('click', finishRound);
-        */
     }
 
     /**
@@ -120,19 +118,42 @@
 
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //  ROUND FINISH
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
+
+    function finishRound() {
+        canvas.toBlob(exportImg);
+    }
+
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //  DATABASE FUNCTIONS
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-    //~~~~~~~~~~~~~~~~~~~~~~~
-    //  EXPORTING FUNCTIONS
-    //~~~~~~~~~~~~~~~~~~~~~~~
 
     /**
      * Exports the canvas's content to a png. Temp code until the page connects to a database or the gallery.
      */
-    function exportImg() {
-        window.open(canvas.toDataURL(),"",`width=${canvas.width},height=${canvas.height}`);
+    function exportImg(blob) {
+        var form_data = new FormData();
+
+        let file_name = `${promptID}.jpg`;
+        form_data.append("lid", lobby);
+        form_data.append("user_pic", blob, file_name);
+        
+        fetch("functions/upload_image.php", {
+            method : "POST",
+            body: form_data
+        }).then(check_status)
+            .then(console.log);
+    }
+
+    function check_status(response) {
+        if (response.ok) {
+            return response.json();
+        } else {
+            console.log(response);
+            return Promise.reject(new Error(response.status + "   " + response.statusText));
+        }
     }
 
 })();

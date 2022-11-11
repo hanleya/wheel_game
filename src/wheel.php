@@ -25,6 +25,7 @@
     <h1 id="prompt"></h1>
     <form method="post" action="canvas.php">
         <input type="hidden" id="prompt-post" name="prompt">
+        <input type="hidden" id="prompt-id-post" name="prompt-id">
         <input type="submit" id="start-btn" value="Start">
     </form>
     

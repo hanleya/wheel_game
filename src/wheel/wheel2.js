@@ -24,6 +24,7 @@
             clearInterval(interval);
             document.getElementById("prompt").innerHTML = prompt["prompt"];
             document.getElementById("prompt-post").value = prompt["prompt"];
+            document.getElementById("prompt-id-post").value = prompt["promptID"];
             document.getElementById("start-btn").disabled = false;
         }
     }

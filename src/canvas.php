@@ -2,10 +2,11 @@
     include "functions/db_functions.php";
     session_start();
 
-    if (isset($_POST["prompt"]) and isset($_SESSION["lobby"]) and isset($_SESSION["player"])) {
+    if (isset($_POST["prompt"]) and isset($_POST["prompt-id"]) and isset($_SESSION["lobby"]) and isset($_SESSION["player"])) {
         $lobby = $_SESSION["lobby"];
         $player = $_SESSION["player"];
         $prompt = $_POST["prompt"];
+        $promptID = $_POST["prompt-id"];
     } else {
         header("Location: home.php");
     }
@@ -19,6 +20,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="canvas/canvas.css"></link>
+    <script> lobby = "<?php echo $lobby;?>";</script>
+    <script> player = "<?php echo $player;?>";</script>
+    <script> prompt = "<?php echo $prompt;?>";</script>
+    <script> promptID = "<?php echo $promptID;?>";</script>
     <script src="canvas/canvas.js"></script>
     <script src="https://kit.fontawesome.com/dcc3080eaf.js" crossorigin="anonymous"></script>
 </head>
