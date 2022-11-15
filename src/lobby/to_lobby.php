@@ -18,7 +18,7 @@
             create_lobby($code);
             $lobby = get_lobby($code);
             $_SESSION["lobby"] = $lobby;
-            mkdir("../../img/lobbies/".$lobby);
+            mkdir("../img/lobbies/".$lobby);
 
             $player = lobby_add_player($lobby, $name); 
             $_SESSION["player"] = $player;

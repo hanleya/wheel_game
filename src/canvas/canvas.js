@@ -132,19 +132,35 @@
 
     /**
      * Exports the canvas's content to a png. Temp code until the page connects to a database or the gallery.
+     * @param {Blob} blob
      */
     function exportImg(blob) {
         var form_data = new FormData();
 
         let file_name = `${promptID}.jpg`;
         form_data.append("lid", lobby);
+        form_data.append("pid", player);
         form_data.append("user_pic", blob, file_name);
         
         fetch("functions/upload_image.php", {
             method : "POST",
             body: form_data
         }).then(check_status)
-            .then(console.log);
+            .then(() => { setInterval(check_finished, 2000); });
+    }
+
+    /**
+     * Checks every few seconds to see if the other players are done.
+     * @param {*} response 
+     */
+    function check_finished() {
+        let url = "functions/check_finished.php?lobby=" + lobby;
+
+        fetch(url)
+            .then(check_status)
+            .then((response) => { 
+                if(response["ready"]) { window.location.href = "gallery.php"; }
+            });
     }
 
     function check_status(response) {

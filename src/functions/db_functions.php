@@ -69,6 +69,19 @@
         assign_prompts($lid);
         echo json_encode([]);
     }
+
+    function check_finished($lid) {
+        
+        $query = "SELECT isReady FROM player WHERE lobbyID = :l AND isReady != 2";
+        $params = [":l" => $lid];
+
+        $db = connect();
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+
+        return count($stmt->fetchAll()) == 0;
+
+    }
     
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #  PLAYER FUNCTIONS
@@ -151,6 +164,17 @@
 
     }
 
+    function player_finished($pid) {
+        
+        $query = "UPDATE player SET isReady = 2 WHERE :p = playerID;";
+        $params = [":p" => $pid];
+
+        $db = connect();
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+
+    }
+
     
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #  PROMPT FUNCTIONS
@@ -206,6 +230,31 @@
         $db = connect();
         $stmt = $db->prepare($query);
         $stmt->execute($params);
+
+    }
+
+    function get_next_prompt($lid, $n) {
+
+        $query = "  SELECT pl.playerName, pr.prompt, pr.promptID
+                    FROM (SELECT * FROM player WHERE lobbyID = :l) pl
+                        JOIN prompt pr ON pr.playerID = pl.playerID
+                    ORDER BY pl.playerID;";
+        $params = [":l" => $lid];
+
+        $db = connect();
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
+
+        $pl = $stmt->fetch(PDO::FETCH_ASSOC);
+        for($i = 0; $i <= $n; $i++) {
+            $pl = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($pl === false) {
+                return json_encode(["found" => false]);
+            }
+        }
+
+        $pl["found"] = true;
+        return json_encode($pl);
 
     }
 
