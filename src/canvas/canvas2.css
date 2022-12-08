@@ -2,6 +2,7 @@
 body {
     background-color: #A5CFE3;
     height: 100vh;
+    font-family: 'Poppins', sans-serif;
 }
 
 #prompt {
@@ -16,6 +17,7 @@ body {
 #canvas {
     border: .25em solid black;
     flex-basis: 60%;
+    background-color: white;
 }
 
 #pal_container {
@@ -23,6 +25,7 @@ body {
     text-align: center;
     border: .2em solid black;
     border-radius: 1em;
+    background-color: #cdc3a5;
 }
 
 .pal_button {

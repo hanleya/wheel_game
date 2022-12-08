@@ -1,0 +1,26 @@
+body {
+    background-color: #A5CFE3;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    
+    text-align: center;
+}
+
+body > div {
+    background-color: #ffffff;
+    padding: 15px;
+}
+
+#players, #prompts {
+    background-color: #ebe5d5;
+    
+    flex-basis: 20%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
