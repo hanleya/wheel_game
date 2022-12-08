@@ -1,4 +1,9 @@
 
+body {
+    background-color: #A5CFE3;
+    height: 100vh;
+}
+
 #prompt {
     text-align: center;
 }

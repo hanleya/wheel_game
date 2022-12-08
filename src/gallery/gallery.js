@@ -17,6 +17,7 @@
             document.getElementById("image").src = img_url(response.promptID);
             n++;
         } else {
+            cleanup_round();
         }
     }
 
@@ -30,6 +31,14 @@
         fetch(url)
             .then(check_status)
             .then(disp_pic);
+    }
+
+    function cleanup_round() {
+        let url = "functions/cleanup_round.php?lobby=" + lobby;
+
+        fetch(url)
+            .then(check_status)
+            .then(() => { window.location.href = "home.php"; });
     }
 
     function check_status(response) {

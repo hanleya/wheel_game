@@ -1,0 +1,21 @@
+body {
+    background-color: #A5CFE3;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    font-family: 'Poppins', sans-serif;
+}
+
+body > div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}

@@ -18,7 +18,7 @@
 
         $query = "SELECT lobbyID FROM lobby WHERE accessCode = :c;";
         $params = [":c" => $code];
-
+        
         $db = connect();
         $stmt = $db->prepare($query);
         $stmt->execute($params);
@@ -202,6 +202,17 @@
         $stmt = $db->prepare($query);
 
         return $stmt->execute($params);
+
+    }
+
+    function remove_prompt($prid) {
+        
+        $query = "DELETE FROM prompt WHERE promptID = :p;";
+        $params = [":p" => $prid];
+
+        $db = connect();
+        $stmt = $db->prepare($query);
+        $stmt->execute($params);
 
     }
 

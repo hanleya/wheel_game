@@ -28,7 +28,7 @@
     //~~~~~~~~~~~~~~~~~~~~~~~~
 
     function update_players(players) {
-        let p_div = document.getElementById("players");
+        let p_div = document.getElementById("player-list");
 
         p_div.innerHTML = "";
 

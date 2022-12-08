@@ -17,17 +17,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="lobby/lobby.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">    
     <script> lobby = "<?php echo $lobby;?>";</script>
     <script> player = "<?php echo $player;?>";</script>
-    <script src="lobby/lobby.js"></script>
+    <script src="lobby/lobby2.js"></script>
 </head>
 <body>
-    <div id=players></div>
-    <div id=prompts>
-        <input type="text" id="prompt-in">
-        <button id="prompt-btn">Submit</button>
-        <div id=prompt-list></div>
+    <div>
+        <div id=players>
+            <h2>Players</h2>
+            <div id=player-list></div>
+            <button id="start-btn">Start</button>
+        </div>
+        <div id=prompts>
+            <h2>Prompts</h2>
+            <div id=prompt-list></div>
+            <input type="text" id="prompt-in">
+            <button id="prompt-btn">Submit</button>
+        </div>
     </div>
-    <button id="start-btn">Start</button>
 </body>
 </html>
