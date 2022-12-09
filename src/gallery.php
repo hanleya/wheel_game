@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">    
     <script> lobby = "<?php echo $lobby;?>";</script>
     <script> player = "<?php echo $player;?>";</script>
-    <script src="gallery/gallery.js"></script>
+    <script src="gallery/gallery2.js"></script>
     <title>Document</title>
 </head>
 <body>
