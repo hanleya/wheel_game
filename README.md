@@ -10,8 +10,3 @@
 &ensp; In the docs folder, there is a setup.sql file. Run this file on your MySQL server. To allow the site to connect to the server, locate the config file at src/functions/db_config.php. Fill in the relevant information to $databasehost, $databaseuser, and $databasepassword. Leave $database as is.
   
 &ensp; Now, upload the contents of the src folder to your server using an FTP. Once this has been done, the site should function correctly.
-
-
-# API Documentation
-
-&ensp;
